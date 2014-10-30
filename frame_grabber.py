@@ -38,6 +38,9 @@ class VideoFrameGrabber(object):
     def set_frame_step(self, frame_step):
         self.frame_step = frame_step
 
+    def set_output_path(self, output_path):
+        self.output_path = output_path
+
     def _make_output_directory(self):
         
         if not os.path.exists(self.output_path):
@@ -60,7 +63,7 @@ class VideoFrameGrabber(object):
         if not end_frame:
             end_frame = self.total_frames
 
-        frames_to_get = numpy.arange(start_frame, end_frame, self.frame_step)
+        frames_to_get = numpy.arange(start_frame, end_frame, self.frame_step)        
         frame_path_list = []        
         
         prog = progress(len(frames_to_get))
@@ -85,7 +88,7 @@ class VideoFrameGrabber(object):
 if __name__ == "__main__":
     
     # Parse Command Line Arguments
-    parser = argparse.ArgumentParser(prog='video_frame_grabber', description='Script extract frames periodically from a video.')
+    parser = argparse.ArgumentParser(prog='frame_grabber', description='Script extract frames periodically from a video.')
     parser.add_argument('input_video_path', help='Path to video to be processed.')
     parser.add_argument('output_frames_path', help='Path to folder to save results.')
     parser.add_argument('--start_frame', default='0', help='First frame to sample.')
