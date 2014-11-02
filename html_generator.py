@@ -34,12 +34,35 @@ class HtmlGenerator():
             if (image % 4) == 0: # logic to place starting tr tag
                 self._tag('tr')
                 
-            self._cell(self.image(images[image])+self._p(words[image]),class_name=classes[image])
+            self._cell(self.image(images[image])+self._p(words[image]), class_name=classes[image])
             
             if ((image+1) % 4) == 0: # logic to place ending tr tag
                 self._tag('/tr')
         
         self._tag('/table')
+
+    def form_table(self, images, words, classes):
+        num_images = len(images)
+        self._tag('form method="post"')
+        self._tag('table')
+        
+        for image in xrange(num_images):
+            if (image % 4) == 0: # logic to place starting tr tag
+                self._tag('tr')
+            
+            input_id = 'frame%d' % image
+            self._cell(self.image(images[image]) + 
+                       self._p(words[image]) + 
+                       self.input(input_id, input_id),
+                       class_name=classes[image])
+            
+            if ((image+1) % 4) == 0: # logic to place ending tr tag
+                self._tag('/tr')
+
+        self._tag('/table')
+        self._tag('INPUT type="submit" value="Send"')
+        self._tag('INPUT type="reset"')
+        self._tag('/form')
 
     def _cell(self,string,class_name=True):
         self._tag('td class="%s"' % class_name)
@@ -54,6 +77,10 @@ class HtmlGenerator():
         string = '<img src="%s"></img>\n' % url
         return string
     
+    def input(self, id, name, type="text", value=""):
+        string = '<input id=%s name=%s type=%s value=%s>' % (id, name, type, value)
+        return string
+
     def link(self,url,string):
         self.string('<a href="%s">%s</a><br>' % (url, string))
 

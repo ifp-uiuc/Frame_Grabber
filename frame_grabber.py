@@ -46,7 +46,7 @@ class VideoFrameGrabber(object):
         if not os.path.exists(self.output_path):
             os.makedirs(self.output_path)
                     
-        frames_directory = os.path.join(self.output_path, 'frames')
+        frames_directory = os.path.join(self.output_path, 'static')
         if not os.path.exists(frames_directory):
             os.makedirs(frames_directory)
 
@@ -73,9 +73,10 @@ class VideoFrameGrabber(object):
             width, height = video_frame.size
             new_size = (int(width/self.resize_factor), int(height/self.resize_factor))
             video_frame = video_frame.resize(new_size)
-            filename = os.path.join(self.output_path, 'frames', 'frame-%06d.jpeg' % frame)
+            filename = os.path.join(self.output_path, 'static', 'frame-%06d.jpeg' % frame)
+            relative_path = os.path.join('static', 'frame-%06d.jpeg' % frame)
             video_frame.save(filename)
-            frame_path_list.append(filename)                        
+            frame_path_list.append(relative_path)                        
 
         frame_to_get_str_list = [str(frame) for frame in frames_to_get]
         prog.end()

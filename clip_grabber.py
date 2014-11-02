@@ -2,7 +2,7 @@ import os
 import argparse
 import json
 
-from video_frame_grabber import VideoFrameGrabber
+from frame_grabber import VideoFrameGrabber
 
 
 if __name__ == "__main__":

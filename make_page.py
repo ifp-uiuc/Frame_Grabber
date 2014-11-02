@@ -10,5 +10,5 @@ def make_page(path, name, images, words=None):
     title = 'Images'
     page = HtmlGenerator(filename)
     page.h1(title)
-    page.table(images,  words, css_ids)
+    page.form_table(images,  words, css_ids)
     page.close()
