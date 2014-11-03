@@ -53,6 +53,8 @@ def post_to_json(data, frame_step=60):
 
     group_ids = numpy.unique(data)
     group_ids = group_ids[group_ids != ''] # remove empty strings
+    sorted_index = numpy.argsort([int(group_id) for group_id in group_ids])
+    group_ids = numpy.array(group_ids)[sorted_index]
 
 
     data_array = numpy.array(data)
@@ -60,7 +62,7 @@ def post_to_json(data, frame_step=60):
     group_list = []
     for group_id in group_ids:
         print group_id
-        group = make_group(frame_numbers, data_array, group_id)
+        group = make_group(frame_numbers, data_array, str(group_id))
         group_list.append(group)
 
     json.dump(group_list, open('clip.json', 'w'))
