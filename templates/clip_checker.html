@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content%}
+    <form method="post">
+    {% for group in groups %}
+    <div class="eight columns feature">
+    <h1>{{ group.name }}</h1>
+    <h3>Group mean</h3>
+    <img src={{ group.mean }}></img>
+    </div>
+    <div class="eight columns">
+    </div>
+    <hr class="large" />
+    {% for clip in group.clips %}
+        <div class="one-third column feature">
+        <h2>{{ clip.name }}</h2>
+        <h3>Clip mean</h3>
+        <img src={{ clip.mean }}></img>
+        <h3>Pairwise MSE</h3>
+        <img src={{ clip.pairwise_mse }}></img>
+        <input type="checkbox"> Modify manually.<br>
+        <input type="text" placeholder="threshold">
+        </div>
+    {% endfor %}
+    <hr>
+    {% endfor %}
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+    </form>
+{% endblock %}
