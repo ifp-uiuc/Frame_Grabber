@@ -6,7 +6,7 @@ from frame_grabber import VideoFrameGrabber
 
 
 if __name__ == "__main__":
-    
+
     # Parse Command Line Arguments
     parser = argparse.ArgumentParser(prog='clip_grabber', description='Script extract frames periodically from a video.')
     parser.add_argument('input_video_path', help='Path to video to be processed.')
@@ -49,6 +49,3 @@ if __name__ == "__main__":
             # Call frame grabber on clip.
             frame_grabber.set_output_path(clip_path)
             frame_grabber.run(clip[0]-padding, clip[1]+padding)
-
-
-
